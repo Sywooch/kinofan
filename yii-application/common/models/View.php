@@ -10,9 +10,10 @@ use Yii;
  * @property integer $userId
  * @property integer $filmId
  * @property integer $estimation
+ * @property integer $status
  *
- * @property Film $film
  * @property User $user
+ * @property Film $film
  */
 class View extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,7 @@ class View extends \yii\db\ActiveRecord
     {
         return [
             [['userId', 'filmId', 'estimation'], 'required'],
-            [['userId', 'filmId', 'estimation'], 'integer']
+            [['userId', 'filmId', 'estimation', 'status'], 'integer']
         ];
     }
 
@@ -44,15 +45,8 @@ class View extends \yii\db\ActiveRecord
             'userId' => 'User ID',
             'filmId' => 'Film ID',
             'estimation' => 'Estimation',
+            'status' => 'Status',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFilm()
-    {
-        return $this->hasOne(Film::className(), ['id' => 'filmId']);
     }
 
     /**
@@ -61,5 +55,13 @@ class View extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFilm()
+    {
+        return $this->hasOne(Film::className(), ['id' => 'filmId']);
     }
 }

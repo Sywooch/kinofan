@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\FilmSearch;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -12,6 +13,8 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\authclient\OAuth2;
+use common\models;
 
 /**
  * Site controller
@@ -62,12 +65,24 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'successCallback'],
+            ],
         ];
     }
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new FilmSearch();
+        $films = $searchModel->search(Yii::$app->request->queryParams);
+
+//        $searchModel = new ProductSearch();
+//        $products = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('../site/index', [
+            'films' => $categories,
+            //'products' => $products,
+        ]);
     }
 
     public function actionLogin()
@@ -167,5 +182,11 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function successCallback($client)
+    {
+        $attributes = $client->getUserAttributes();
+
     }
 }

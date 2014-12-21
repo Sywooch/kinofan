@@ -8,23 +8,48 @@ $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
     <div class="container">
-        <?php foreach ($films->models as $film) { ?>
-            <div class="col-lg-12 bg-info" style="margin: 10px">
+        <?php foreach ($films as $film) { ?>
+            <div class="col-lg-12 bg-danger" style="margin: 10px; padding: 10px">
                 <div class="col-lg-12 lead">
                     <?= $film->title; ?>
                 </div>
                 <div class="col-lg-3">
                     <img class="img-rounded" style="width: 200px; height: 300px" src="<?= $film->poster; ?>">
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 row">
                     <div>
-                        &nbsp Год: <?= $film->year; ?>
+                        &nbsp Year: <?= $film->year; ?>
                     </div>
                     <div>
-                        &nbsp Страна: <?= $film->country; ?>
+                        &nbsp Genres: <?php foreach($film->genres as $genre){?>
+                            <?= Html::a($genre->genreName,['filtr/genres' , 'id' => $genre->id]) ?>, &nbsp
+                        <?php }; ?>
                     </div>
                     <div>
-                        &nbsp Описание: <br/>
+                        &nbsp Studio: <?php foreach($film->studios as $studio){?>
+                            <?= $studio->studioName ?>, &nbsp
+                        <?php }; ?>
+                    </div>
+                    <div>
+                        &nbsp Rezhiser: <?php foreach($film->rezhisers as $rezhiser){?>
+                            <?= $rezhiser->rezhiserName ?>, &nbsp
+                        <?php }; ?>
+                    </div>
+                    <div>
+                        &nbsp Producers: <?php foreach($film->producers as $producer){?>
+                            <?= $producer->producerName ?>, &nbsp
+                        <?php }; ?>
+                    </div>
+                    <div>
+                        &nbsp Actors: <?php foreach($film->actors as $actor){?>
+                            <?= $actor->actorName ?>, &nbsp
+                        <?php }; ?>
+                    </div>
+                    <div>
+                        &nbsp Countrty: <?= $film->country; ?>
+                    </div>
+                    <div>
+                        &nbsp Description: <br/>
                         &nbsp <?= $film->description; ?>
                     </div>
                 </div>

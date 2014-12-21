@@ -74,9 +74,8 @@ class SiteController extends Controller
     {
         $searchModel = new FilmSearch();
         $films = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('../site/index', [
-            'films' => $films,
+            'films' => $films->models,
         ]);
     }
 

@@ -1,18 +1,13 @@
 <?php
-
+/* @var $this yii\web\View */
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
-/* @var $model common\models\UserSeting */
-/* @var $form yii\widgets\ActiveForm */
 ?>
+<h1>profile/index</h1>
 
 <div class="user-seting-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'userId')->textInput() ?>
 
     <?= $form->field($model, 'genres')->textarea(['rows' => 6]) ?>
 

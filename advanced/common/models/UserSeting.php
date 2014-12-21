@@ -10,7 +10,8 @@ use Yii;
  * @property integer $userId
  * @property string $genres
  * @property string $countrys
- * @property string $years
+ * @property string $yearS
+ * @property string $yearF
  * @property string $producers
  * @property string $actors
  * @property string $studios
@@ -32,9 +33,10 @@ class UserSeting extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['userId', 'genres', 'countrys', 'years', 'producers', 'actors', 'studios', 'rezhesers'], 'required'],
+            [['userId'], 'required'],
             [['userId'], 'integer'],
-            [['genres', 'countrys', 'years', 'producers', 'actors', 'studios', 'rezhesers'], 'string']
+            [['genres', 'countrys', 'producers', 'actors', 'studios', 'rezhesers'], 'string'],
+            [['yearS', 'yearF'], 'safe']
         ];
     }
 
@@ -47,7 +49,8 @@ class UserSeting extends \yii\db\ActiveRecord
             'userId' => 'User ID',
             'genres' => 'Genres',
             'countrys' => 'Countrys',
-            'years' => 'Years',
+            'yearS' => 'Year S',
+            'yearF' => 'Year F',
             'producers' => 'Producers',
             'actors' => 'Actors',
             'studios' => 'Studios',

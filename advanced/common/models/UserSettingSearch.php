@@ -19,7 +19,7 @@ class UserSettingSearch extends UserSeting
     {
         return [
             [['userId'], 'integer'],
-            [['genres', 'countrys', 'years', 'producers', 'actors', 'studios', 'rezhesers'], 'safe'],
+            [['genres', 'countrys', 'yearS', 'yearF', 'producers', 'actors', 'studios', 'rezhesers'], 'safe'],
         ];
     }
 
@@ -53,11 +53,12 @@ class UserSettingSearch extends UserSeting
 
         $query->andFilterWhere([
             'userId' => $this->userId,
+            'yearS' => $this->yearS,
+            'yearF' => $this->yearF,
         ]);
 
         $query->andFilterWhere(['like', 'genres', $this->genres])
             ->andFilterWhere(['like', 'countrys', $this->countrys])
-            ->andFilterWhere(['like', 'years', $this->years])
             ->andFilterWhere(['like', 'producers', $this->producers])
             ->andFilterWhere(['like', 'actors', $this->actors])
             ->andFilterWhere(['like', 'studios', $this->studios])

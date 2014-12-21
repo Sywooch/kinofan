@@ -21,9 +21,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'countrys') ?>
 
-    <?= $form->field($model, 'years') ?>
+    <?= $form->field($model, 'yearS') ?>
 
-    <?= $form->field($model, 'producers') ?>
+    <?= $form->field($model, 'yearF') ?>
+
+    <?php // echo $form->field($model, 'producers') ?>
 
     <?php // echo $form->field($model, 'actors') ?>
 

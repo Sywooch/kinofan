@@ -27,22 +27,22 @@ $this->title = 'My Yii Application';
                     </div>
                     <div>
                         &nbsp Studio: <?php foreach($film->studios as $studio){?>
-                            <?= $studio->studioName ?>, &nbsp
+                            <?= Html::a($studio->studioName,['filtr/studios', 'id' => $studio->id]) ?>, &nbsp
                         <?php }; ?>
                     </div>
                     <div>
                         &nbsp Rezhiser: <?php foreach($film->rezhisers as $rezhiser){?>
-                            <?= $rezhiser->rezhiserName ?>, &nbsp
+                            <?= Html::a($rezhiser->rezhiserName,['filtr/rezhisers', 'id' => $rezhiser->id]) ?>, &nbsp
                         <?php }; ?>
                     </div>
                     <div>
                         &nbsp Producers: <?php foreach($film->producers as $producer){?>
-                            <?= $producer->producerName ?>, &nbsp
+                            <?= Html::a($producer->producerName,['filtr/producers', 'id' => $producer->id]) ?>, &nbsp
                         <?php }; ?>
                     </div>
                     <div>
                         &nbsp Actors: <?php foreach($film->actors as $actor){?>
-                            <?= $actor->actorName ?>, &nbsp
+                            <?= Html::a($actor->actorName,['filtr/actors', 'id' => $actor->id]) ?>, &nbsp
                         <?php }; ?>
                     </div>
                     <div>

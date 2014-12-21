@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Film;
+use common\models\Country;
 
 /**
- * FilmSearch represents the model behind the search form about `common\models\Film`.
+ * CountrySearch represents the model behind the search form about `common\models\Country`.
  */
-class FilmSearch extends Film
+class CountrySearch extends Country
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class FilmSearch extends Film
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['title', 'description', 'year', 'poster'], 'safe'],
+            [['filmId', 'countryId'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class FilmSearch extends Film
      */
     public function search($params)
     {
-        $query = Film::find();
+        $query = Country::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -52,13 +51,9 @@ class FilmSearch extends Film
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'year' => $this->year,
+            'filmId' => $this->filmId,
+            'countryId' => $this->countryId,
         ]);
-
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'poster', $this->poster]);
 
         return $dataProvider;
     }

@@ -8,6 +8,7 @@ use common\models\ActorName;
 use common\models\ProducerName;
 use common\models\RezhiserName;
 use common\models\StudioName;
+use common\models\CountryName;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -58,6 +59,14 @@ class FiltrController extends \yii\web\Controller
         ]);
     }
 
+    public function actionCountries(){
+        $request = Yii::$app->request;
+        $get = $request->get();
+        return $this->render('../site/index', [
+            'films' => $this->findCountries($get['id']),
+        ]);
+    }
+
 
     protected function findGenres($id)
     {
@@ -98,6 +107,15 @@ class FiltrController extends \yii\web\Controller
     protected function findStudios($id)
     {
         if (($model = StudioName::findOne($id)) !== null) {
+            return $model->films;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    protected function findCountries($id)
+    {
+        if (($model = CountryName::findOne($id)) !== null) {
             return $model->films;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

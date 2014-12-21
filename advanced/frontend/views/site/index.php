@@ -41,12 +41,14 @@ $this->title = 'My Yii Application';
                         <?php }; ?>
                     </div>
                     <div>
-                        &nbsp Actors: <?php foreach($film->actors as $actor){?>
-                            <?= Html::a($actor->actorName,['filtr/actors', 'id' => $actor->id]) ?>, &nbsp
+                        &nbsp Actors: <?php foreach($film->actors as $country){?>
+                            <?= Html::a($country->actorName,['filtr/actors', 'id' => $country->id]) ?>, &nbsp
                         <?php }; ?>
                     </div>
                     <div>
-                        &nbsp Countrty: <?= $film->country; ?>
+                        &nbsp Country: <?php foreach($film->countries as $country){?>
+                            <?= Html::a($country->countryName,['filtr/countries', 'id' => $country->id]) ?>, &nbsp
+                        <?php }; ?>
                     </div>
                     <div>
                         &nbsp Description: <br/>

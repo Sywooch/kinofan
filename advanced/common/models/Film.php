@@ -11,12 +11,12 @@ use Yii;
  * @property string $title
  * @property string $description
  * @property string $year
- * @property string $country
  * @property string $poster
  *
  * @property ActorName[] $actors
  * @property Comment[] $comments
  * @property User[] $users
+ * @property CountryName[] $countries
  * @property GenreName[] $genres
  * @property News $news
  * @property ProducerName[] $producers
@@ -40,10 +40,10 @@ class Film extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'year', 'country', 'poster'], 'required'],
+            [['title', 'description', 'year', 'poster'], 'required'],
             [['description'], 'string'],
             [['year'], 'safe'],
-            [['title', 'country', 'poster'], 'string', 'max' => 255]
+            [['title', 'poster'], 'string', 'max' => 255]
         ];
     }
 
@@ -57,7 +57,6 @@ class Film extends \yii\db\ActiveRecord
             'title' => 'Title',
             'description' => 'Description',
             'year' => 'Year',
-            'country' => 'Country',
             'poster' => 'Poster',
         ];
     }
@@ -84,6 +83,14 @@ class Film extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['id' => 'userId'])->viaTable('{{%View}}', ['filmId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCountries()
+    {
+        return $this->hasMany(CountryName::className(), ['id' => 'countryId'])->viaTable('{{%Country}}', ['filmId' => 'id']);
     }
 
     /**

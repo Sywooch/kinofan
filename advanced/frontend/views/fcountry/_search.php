@@ -4,26 +4,20 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\FilmSearch */
+/* @var $model common\models\FCountrySearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="film-search">
+<div class="fcountry-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'userId') ?>
 
-    <?= $form->field($model, 'title') ?>
-
-    <?= $form->field($model, 'description') ?>
-
-    <?= $form->field($model, 'year') ?>
-
-    <?= $form->field($model, 'poster') ?>
+    <?= $form->field($model, 'countyId') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

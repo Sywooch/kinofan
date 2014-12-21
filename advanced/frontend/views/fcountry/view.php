@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Film */
+/* @var $model common\models\FCountry */
 
-$this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Films', 'url' => ['index']];
+$this->title = $model->userId;
+$this->params['breadcrumbs'][] = ['label' => 'Fcountries', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="film-view">
+<div class="fcountry-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Update', ['update', 'userId' => $model->userId, 'countyId' => $model->countyId], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'userId' => $model->userId, 'countyId' => $model->countyId], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -28,11 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'title',
-            'description:ntext',
-            'year',
-            'poster',
+            'userId',
+            'countyId',
         ],
     ]) ?>
 

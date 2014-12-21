@@ -8,14 +8,22 @@ use Yii;
  * This is the model class for table "{{%UserSeting}}".
  *
  * @property integer $userId
- * @property string $genres
- * @property string $countrys
  * @property string $yearS
  * @property string $yearF
- * @property string $producers
- * @property string $actors
- * @property string $studios
- * @property string $rezhesers
+ *
+ * @property FActor[] $fActors
+ * @property ActorName[] $actors
+ * @property FCountry[] $fCountries
+ * @property CountryName[] $counties
+ * @property FGenre[] $fGenres
+ * @property GenreName[] $genres
+ * @property FProducer[] $fProducers
+ * @property ProducerName[] $producers
+ * @property FRezhiser[] $fRezhisers
+ * @property RezhiserName[] $rezhisers
+ * @property FStudio[] $fStudios
+ * @property StudioName[] $studios
+ * @property User $user
  */
 class UserSeting extends \yii\db\ActiveRecord
 {
@@ -35,7 +43,6 @@ class UserSeting extends \yii\db\ActiveRecord
         return [
             [['userId'], 'required'],
             [['userId'], 'integer'],
-            [['genres', 'countrys', 'producers', 'actors', 'studios', 'rezhesers'], 'string'],
             [['yearS', 'yearF'], 'safe']
         ];
     }
@@ -47,14 +54,112 @@ class UserSeting extends \yii\db\ActiveRecord
     {
         return [
             'userId' => 'User ID',
-            'genres' => 'Genres',
-            'countrys' => 'Countrys',
             'yearS' => 'Year S',
             'yearF' => 'Year F',
-            'producers' => 'Producers',
-            'actors' => 'Actors',
-            'studios' => 'Studios',
-            'rezhesers' => 'Rezhesers',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFActors()
+    {
+        return $this->hasMany(FActor::className(), ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getActors()
+    {
+        return $this->hasMany(ActorName::className(), ['id' => 'actorId'])->viaTable('{{%FActor}}', ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFCountries()
+    {
+        return $this->hasMany(FCountry::className(), ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCounties()
+    {
+        return $this->hasMany(CountryName::className(), ['id' => 'countyId'])->viaTable('{{%FCountry}}', ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFGenres()
+    {
+        return $this->hasMany(FGenre::className(), ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGenres()
+    {
+        return $this->hasMany(GenreName::className(), ['id' => 'genreId'])->viaTable('{{%FGenre}}', ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFProducers()
+    {
+        return $this->hasMany(FProducer::className(), ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProducers()
+    {
+        return $this->hasMany(ProducerName::className(), ['id' => 'producerId'])->viaTable('{{%FProducer}}', ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFRezhisers()
+    {
+        return $this->hasMany(FRezhiser::className(), ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRezhisers()
+    {
+        return $this->hasMany(RezhiserName::className(), ['id' => 'rezhiserId'])->viaTable('{{%FRezhiser}}', ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFStudios()
+    {
+        return $this->hasMany(FStudio::className(), ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStudios()
+    {
+        return $this->hasMany(StudioName::className(), ['id' => 'studioId'])->viaTable('{{%FStudio}}', ['userId' => 'userId']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'userId']);
     }
 }

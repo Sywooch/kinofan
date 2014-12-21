@@ -10,8 +10,8 @@ use Yii;
  * @property integer $userId
  * @property integer $producerId
  *
+ * @property UserSeting $user
  * @property ProducerName $producer
- * @property User $user
  */
 class FProducer extends \yii\db\ActiveRecord
 {
@@ -48,16 +48,16 @@ class FProducer extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProducer()
+    public function getUser()
     {
-        return $this->hasOne(ProducerName::className(), ['id' => 'producerId']);
+        return $this->hasOne(UserSeting::className(), ['userId' => 'userId']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getProducer()
     {
-        return $this->hasOne(User::className(), ['id' => 'userId']);
+        return $this->hasOne(ProducerName::className(), ['id' => 'producerId']);
     }
 }

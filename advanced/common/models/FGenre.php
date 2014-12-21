@@ -10,8 +10,8 @@ use Yii;
  * @property integer $userId
  * @property integer $genreId
  *
+ * @property UserSeting $user
  * @property GenreName $genre
- * @property User $user
  */
 class FGenre extends \yii\db\ActiveRecord
 {
@@ -48,16 +48,16 @@ class FGenre extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getGenre()
+    public function getUser()
     {
-        return $this->hasOne(GenreName::className(), ['id' => 'genreId']);
+        return $this->hasOne(UserSeting::className(), ['userId' => 'userId']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getGenre()
     {
-        return $this->hasOne(User::className(), ['id' => 'userId']);
+        return $this->hasOne(GenreName::className(), ['id' => 'genreId']);
     }
 }

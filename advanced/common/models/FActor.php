@@ -10,8 +10,8 @@ use Yii;
  * @property integer $userId
  * @property integer $actorId
  *
+ * @property UserSeting $user
  * @property ActorName $actor
- * @property User $user
  */
 class FActor extends \yii\db\ActiveRecord
 {
@@ -48,16 +48,16 @@ class FActor extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActor()
+    public function getUser()
     {
-        return $this->hasOne(ActorName::className(), ['id' => 'actorId']);
+        return $this->hasOne(UserSeting::className(), ['userId' => 'userId']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getActor()
     {
-        return $this->hasOne(User::className(), ['id' => 'userId']);
+        return $this->hasOne(ActorName::className(), ['id' => 'actorId']);
     }
 }

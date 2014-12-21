@@ -17,21 +17,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'userId') ?>
 
-    <?= $form->field($model, 'genres') ?>
-
-    <?= $form->field($model, 'countrys') ?>
-
     <?= $form->field($model, 'yearS') ?>
 
     <?= $form->field($model, 'yearF') ?>
-
-    <?php // echo $form->field($model, 'producers') ?>
-
-    <?php // echo $form->field($model, 'actors') ?>
-
-    <?php // echo $form->field($model, 'studios') ?>
-
-    <?php // echo $form->field($model, 'rezhesers') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

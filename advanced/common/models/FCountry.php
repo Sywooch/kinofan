@@ -10,8 +10,8 @@ use Yii;
  * @property integer $userId
  * @property integer $countyId
  *
+ * @property UserSeting $user
  * @property CountryName $county
- * @property User $user
  */
 class FCountry extends \yii\db\ActiveRecord
 {
@@ -48,16 +48,16 @@ class FCountry extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCounty()
+    public function getUser()
     {
-        return $this->hasOne(CountryName::className(), ['id' => 'countyId']);
+        return $this->hasOne(UserSeting::className(), ['userId' => 'userId']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getCounty()
     {
-        return $this->hasOne(User::className(), ['id' => 'userId']);
+        return $this->hasOne(CountryName::className(), ['id' => 'countyId']);
     }
 }

@@ -29,14 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'userId',
-            'genres:ntext',
-            'countrys:ntext',
             'yearS',
             'yearF',
-            'producers:ntext',
-            'actors:ntext',
-            'studios:ntext',
-            'rezhesers:ntext',
         ],
     ]) ?>
 

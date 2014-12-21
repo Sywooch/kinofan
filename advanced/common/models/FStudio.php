@@ -10,8 +10,8 @@ use Yii;
  * @property integer $userId
  * @property integer $studioId
  *
+ * @property UserSeting $user
  * @property StudioName $studio
- * @property User $user
  */
 class FStudio extends \yii\db\ActiveRecord
 {
@@ -48,16 +48,16 @@ class FStudio extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getStudio()
+    public function getUser()
     {
-        return $this->hasOne(StudioName::className(), ['id' => 'studioId']);
+        return $this->hasOne(UserSeting::className(), ['userId' => 'userId']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getStudio()
     {
-        return $this->hasOne(User::className(), ['id' => 'userId']);
+        return $this->hasOne(StudioName::className(), ['id' => 'studioId']);
     }
 }

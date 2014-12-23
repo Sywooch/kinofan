@@ -42,6 +42,11 @@ AppAsset::register($this);
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {
                 $menuItems[] = [
+                    'label' => 'Film List',
+                    'url' => ['/view/index'],
+                    'linkOptions' => ['data-method' => 'post'],
+                ];
+                $menuItems[] = [
                     'label' => 'Profile',
                     'url' => ['/profile/index'],
                     'linkOptions' => ['data-method' => 'post'],

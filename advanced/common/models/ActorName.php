@@ -12,6 +12,8 @@ use Yii;
  *
  * @property Actor[] $actors
  * @property Film[] $films
+ * @property FActor[] $fActors
+ * @property UserSeting[] $users
  */
 class ActorName extends \yii\db\ActiveRecord
 {
@@ -59,5 +61,21 @@ class ActorName extends \yii\db\ActiveRecord
     public function getFilms()
     {
         return $this->hasMany(Film::className(), ['id' => 'filmId'])->viaTable('{{%Actor}}', ['actorId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFActors()
+    {
+        return $this->hasMany(FActor::className(), ['actorId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(UserSeting::className(), ['userId' => 'userId'])->viaTable('{{%FActor}}', ['actorId' => 'id']);
     }
 }

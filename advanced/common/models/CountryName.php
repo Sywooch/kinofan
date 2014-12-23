@@ -12,6 +12,8 @@ use Yii;
  *
  * @property Country[] $countries
  * @property Film[] $films
+ * @property FCountry[] $fCountries
+ * @property UserSeting[] $users
  */
 class CountryName extends \yii\db\ActiveRecord
 {
@@ -59,5 +61,21 @@ class CountryName extends \yii\db\ActiveRecord
     public function getFilms()
     {
         return $this->hasMany(Film::className(), ['id' => 'filmId'])->viaTable('{{%Country}}', ['countryId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFCountries()
+    {
+        return $this->hasMany(FCountry::className(), ['countyId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(UserSeting::className(), ['userId' => 'userId'])->viaTable('{{%FCountry}}', ['countyId' => 'id']);
     }
 }

@@ -10,6 +10,8 @@ use Yii;
  * @property integer $id
  * @property string $producerName
  *
+ * @property FProducer[] $fProducers
+ * @property UserSeting[] $users
  * @property Producer[] $producers
  * @property Film[] $films
  */
@@ -43,6 +45,22 @@ class ProducerName extends \yii\db\ActiveRecord
             'id' => 'ID',
             'producerName' => 'Producer Name',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFProducers()
+    {
+        return $this->hasMany(FProducer::className(), ['producerId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(UserSeting::className(), ['userId' => 'userId'])->viaTable('{{%FProducer}}', ['producerId' => 'id']);
     }
 
     /**

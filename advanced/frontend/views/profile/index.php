@@ -13,14 +13,7 @@ use yii\helpers\ArrayHelper
         <?php foreach ($model->actors as $m) { ?>
             <p class="label label-warning"><?= $m->actorName ?> <?= Html::a('<span class="glyphicon glyphicon-remove"></span>', ['profile/dactor', 'id' => $m->id]) ?></p>,
         <?php } ?>
-        <?php $form = ActiveForm::begin(['action' => 'profile/addactor']); ?>
-        <div class="col-lg-6">
-            <?= $form->field($model, 'actors')->dropDownList($actors) ?>
-        </div>
-        <div class="col-lg-6">
-            <?= Html::submitButton('<span class="glyphicon glyphicon-plus"></span>', ['class' => 'btn btn-lg btn-default']) ?>
-        </div>
-        <?php ActiveForm::end(); ?>
+        <?= Html::a('Add', ['profile/addactor'], ['class' => 'btn btn-succes'])?>
 
     </div>
     <div class="col-lg-10 col-lg-offset-1 bg-info">

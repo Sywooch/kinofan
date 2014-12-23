@@ -30,15 +30,58 @@ class ViewController extends Controller
      * Lists all View models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $searchModel = new ViewSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+    public function actionIndex(){
+        return $this->render('../view/index', [
+            'views' => $this->findFilms(Yii::$app->user->id),
         ]);
+    }
+
+    protected function findFilms($id)
+    {
+        if (($model = View::find()->where(['userId' => $id])->all()) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('You do not have any viewed film.');
+        }
+    }
+
+    public function actionAdd(){
+        $id = Yii::$app->user->id;
+        $get = Yii::$app->request->get();
+        if ($model = View::findOne(['userId' => $id, 'filmId' => $get]) !== null) {
+            throw new NotFoundHttpException('You watched this film already.');
+        } else {
+            $view = new View();
+            $view->userId = $id;
+            $view->filmId = $get['id'];
+            $view->estimation = 0;
+            $view->save();
+            return $this->goHome();
+        }
+    }
+
+    public function actionDel(){
+        $get = Yii::$app->request->get('id');
+        $this->findFilm($get)->delete();
+        return $this->actionIndex();
+    }
+
+    public function actionComplete(){
+        $get = Yii::$app->request->get('id');
+        $model = $this->findFilm($get);
+        $model->status = 1;
+        $model->save();
+        return $this->actionIndex();
+    }
+
+    protected function findFilm($id)
+    {
+        if (($model = View::findOne(['filmId' => $id, 'userId' => Yii::$app->user->id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('Some doing wrong (.');
+        }
     }
 
     /**

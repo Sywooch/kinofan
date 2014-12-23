@@ -2,7 +2,9 @@
 
 namespace frontend\controllers;
 
+use frontend\models\AddActorForm;
 use Yii;
+use common\models\FActor;
 use common\models\ActorName;
 use common\models\CountryName;
 use common\models\GenreName;
@@ -52,6 +54,24 @@ class ProfileController extends \yii\web\Controller
                 'producers' => $producers,
                 'rezhisers' => $rezhisers,
                 'studios' => $studios,
+            ]);
+        }
+    }
+
+    public function actionAddactor()
+    {
+        $model = new FActor();
+
+        $actors = ActorName::find()->asArray()->orderBy('actorName')->all();
+        $actors = ArrayHelper::map($actors, 'id', 'actorName');
+
+        if ($model->actorId = Yii::$app->request->post('id') !== null
+            && $model->userId = Yii::$app->user->id !== null) {
+            return $this->actionIndex();
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                'item' => $actors
             ]);
         }
     }
@@ -108,7 +128,7 @@ class ProfileController extends \yii\web\Controller
     {
         if ($model = UserSeting::findOne((['userId' => $id]) !== null)) {
             return $model;
-        }else {
+        } else {
             $profile = new UserSeting();
             $profile->userId = $id;
             $profile->save();
@@ -120,14 +140,14 @@ class ProfileController extends \yii\web\Controller
     {
         if (($model = FActor::findOne(['actorId' => $id, 'userId' => Yii::$app->user->id])) !== null) {
             return $model;
-        }else {
+        } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 
     protected function findCountry($id)
     {
-        if (($model = FCountry::findOne(['countyId' => $id,'userId' => Yii::$app->user->id])) !== null) {
+        if (($model = FCountry::findOne(['countyId' => $id, 'userId' => Yii::$app->user->id])) !== null) {
             return $model;
         } else
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -135,7 +155,7 @@ class ProfileController extends \yii\web\Controller
 
     protected function findGenre($id)
     {
-        if (($model = FGenre::findOne(['genreId' => $id,'userId' => Yii::$app->user->id])) !== null) {
+        if (($model = FGenre::findOne(['genreId' => $id, 'userId' => Yii::$app->user->id])) !== null) {
             return $model;
         } else
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -143,7 +163,7 @@ class ProfileController extends \yii\web\Controller
 
     protected function findProducer($id)
     {
-        if (($model = FProducer::findOne(['producerId' => $id,'userId' => Yii::$app->user->id])) !== null) {
+        if (($model = FProducer::findOne(['producerId' => $id, 'userId' => Yii::$app->user->id])) !== null) {
             return $model;
         } else
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -151,7 +171,7 @@ class ProfileController extends \yii\web\Controller
 
     protected function findRezhiser($id)
     {
-        if (($model = FRezhiser::findOne(['rezhiserId' => $id,'userId' => Yii::$app->user->id])) !== null) {
+        if (($model = FRezhiser::findOne(['rezhiserId' => $id, 'userId' => Yii::$app->user->id])) !== null) {
             return $model;
         } else
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -159,7 +179,7 @@ class ProfileController extends \yii\web\Controller
 
     protected function findStudio($id)
     {
-        if (($model = FStudio::findOne(['studioId' => $id,'userId' => Yii::$app->user->id])) !== null) {
+        if (($model = FStudio::findOne(['studioId' => $id, 'userId' => Yii::$app->user->id])) !== null) {
             return $model;
         } else
             throw new NotFoundHttpException('The requested page does not exist.');

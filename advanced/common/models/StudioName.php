@@ -10,6 +10,8 @@ use Yii;
  * @property integer $id
  * @property string $studioName
  *
+ * @property FStudio[] $fStudios
+ * @property UserSeting[] $users
  * @property Studio[] $studios
  * @property Film[] $films
  */
@@ -43,6 +45,22 @@ class StudioName extends \yii\db\ActiveRecord
             'id' => 'ID',
             'studioName' => 'Studio Name',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFStudios()
+    {
+        return $this->hasMany(FStudio::className(), ['studioId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(UserSeting::className(), ['userId' => 'userId'])->viaTable('{{%FStudio}}', ['studioId' => 'id']);
     }
 
     /**

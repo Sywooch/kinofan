@@ -10,6 +10,8 @@ use Yii;
  * @property integer $id
  * @property string $genreName
  *
+ * @property FGenre[] $fGenres
+ * @property UserSeting[] $users
  * @property Genre[] $genres
  * @property Film[] $films
  */
@@ -43,6 +45,22 @@ class GenreName extends \yii\db\ActiveRecord
             'id' => 'ID',
             'genreName' => 'Genre Name',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFGenres()
+    {
+        return $this->hasMany(FGenre::className(), ['genreId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(UserSeting::className(), ['userId' => 'userId'])->viaTable('{{%FGenre}}', ['genreId' => 'id']);
     }
 
     /**

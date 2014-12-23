@@ -54,6 +54,9 @@ $this->title = 'My Yii Application';
                         &nbsp Description: <br/>
                         &nbsp <?= $film->description; ?>
                     </div>
+                    <div class="text-right">
+                        <?= Html::a('<span class="glyphicon glyphicon-film"></span>', ['view/add', 'id' =>$film->id], ['class' => 'btn btn-lg'])?>
+                    </div>
                 </div>
             </div>
         <?php

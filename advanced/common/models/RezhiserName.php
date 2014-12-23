@@ -10,6 +10,8 @@ use Yii;
  * @property integer $id
  * @property string $rezhiserName
  *
+ * @property FRezhiser[] $fRezhisers
+ * @property UserSeting[] $users
  * @property Rezhiser[] $rezhisers
  * @property Film[] $films
  */
@@ -43,6 +45,22 @@ class RezhiserName extends \yii\db\ActiveRecord
             'id' => 'ID',
             'rezhiserName' => 'Rezhiser Name',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFRezhisers()
+    {
+        return $this->hasMany(FRezhiser::className(), ['rezhiserId' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(UserSeting::className(), ['userId' => 'userId'])->viaTable('{{%FRezhiser}}', ['rezhiserId' => 'id']);
     }
 
     /**

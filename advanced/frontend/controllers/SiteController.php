@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use common\models\User;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
@@ -14,6 +15,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\FilmSearch;
 use common\models\Film;
+
 /**
  * Site controller
  */
@@ -181,6 +183,5 @@ class SiteController extends Controller
     public function successCallback($client)
     {
         $attributes = $client->getUserAttributes();
-        // user login or signup comes here
     }
 }
